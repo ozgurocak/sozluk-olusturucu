@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.firefox.options import Options
 import sys
+import json
 
 options = Options()
 options.headless = True
@@ -64,4 +65,11 @@ def getAllWords(totalnum):
 
     return sorted(words)
 
-print(getAllWords(int(sys.argv[1])))
+words = getAllWords(int(sys.argv[1]))
+print(words)
+dictionary = {
+    "dictionary": words
+}
+
+with open("dict.json", "w", encoding="utf-8") as dictfile:
+    json.dump(dictionary, dictfile, ensure_ascii=False)
